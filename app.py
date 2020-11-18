@@ -26,12 +26,12 @@ app = Flask(__name__)
 auth = firebase.auth()
 
 
-@app.route('/webintro.html', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def hello_world():
     return render_template('webintro.html')
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/login.html', methods=['GET', 'POST'])
 def login():
     unsuccessful = 'Please check your credentials'
     successful = 'Login successful'
@@ -40,9 +40,9 @@ def login():
         password = request.form['pass']
         try:
             auth.sign_in_with_email_and_password(email, password)
-            return render_template('new.html', s=successful)
+            return render_template('mainpage.html', s=successful)
         except:
-            return render_template('new.html', us=unsuccessful)
+            return render_template('login.html', us=unsuccessful)
     return render_template('login.html')
 
 
